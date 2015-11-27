@@ -5,47 +5,83 @@ class Risk {
 }
 
 class RiskCard{
-  public String unitType;
-  public String territory;
-  public String owner;
+  private String unitType;
+  private String territory;
+  private String owner;
 
-  public String getUnit(){}
-  public String getTerrioty(){}
-  public String getOwner(){}
+  public RiskCard(String unitType, String territory){
+    this.unitType=unitType;
+    this.territory=territory;
+    owner=null;
+  }
+
+  public String getUnit(){
+    //returns the unit type of this card instance
+  }
+  public String getTerrioty(){
+    //returns the territory on this card instance
+  }
+  public String getOwner(){
+    //gets the current owner of this card
+  }
+  public String setOwner(){
+    //used to reset the owner to null when the card is discarded
+  }
 }
 
 class Deck{
-  RiskCard[] cards = new RiskCard[50];
-  RiskCard[] discardPile = new RiskCard[50];
+  private RiskCard[] cards = new RiskCard[42];
+  private RiskCard[] discardPile = new RiskCard[42];
 
-  public RiskCard draw(){}
-  public void shuffle(){}
-  public void discard(){}
+  public RiskCard draw(){
+    //returns a random card from the cards array
+  }
+  public void shuffle(){
+    //takes all of the cards in the discardPile, adds them to the cards array, and randomizes the order
+  }
+  public void discard(){
+    //takes a card object owned by a player and moves it to the discard pile
+  }
 }
 
 class Player{
-  public int coulour;
-  public int numUnits = 0;
-  public int territoryOwned = 0;
-  public String name;
-  RiskCard[] riskCard = new RiskCard[10];
+  private int colour;
+  private int numUnits = 0;
+  private int territoryOwned = 0;
+  private String name;
+  private ArrayList riskCard = new ArrayList();
 
-  public String getName(){}
-  public boolean addCard(){}
+  public String getName(){
+    return name;
+  }
+  public boolean addCard(Deck d){
+    riskCard.add(d.draw());
+  }
   public boolean addTerriory(){}
-  public String getColour(){}
-  public boolean addUnit(){}
-  public int attack(){}
-  public int defend(){}
+  public String getColour(){
+    return colour;
+  }
+  public boolean addUnit(int units){
+    numUnits = numUnits + units;
+  }
+  public int attack(Territory attacker, Territory defender){
+    /*needs attacker input on how many units to use
+    results should be automatically calculated once attack is initiated
+    should automatically resolve unit placement afterwards too
+    */
+  }
+  public int defend(){
+    //un-needed? attack should be able to resolve the unit numbers and territories owned for both players.
+  }
   public int moveUnits(){}
 }
 
 class Map{
-  public String territory;
-  public String continents;
-  public int unitPerContinents = 0;
-  public boolean cards = false;
-  public String leader;
+  private String territory;
+  private String continents;
+  private int unitPerContinents = 0;
+  private boolean cards = false;
+  private String leader;
 
   public boolean containsTerritory(){}
   public Deck createDeck(){}
@@ -56,11 +92,11 @@ class Map{
 }
 
 class Territory{
-  public String contient;
-  public String owner;
-  public int numUnits = 0;
-  public String name;
-  String[] adjacentTerritory = new String[10];//not most effiecent way to do this
+  private String contient;
+  private String owner;
+  private int numUnits = 0;
+  private String name;
+  private String[] adjacentTerritory = new String[10];//not most effiecent way to do this
 
   public String getContinent(){}
   public String changeOwner(){}
