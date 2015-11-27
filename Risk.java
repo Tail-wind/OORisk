@@ -16,31 +16,62 @@ class RiskCard{
   }
 
   public String getUnit(){
-    //returns the unit type of this card instance
+    return unitType;
   }
   public String getTerrioty(){
-    //returns the territory on this card instance
+    return territory;
   }
   public String getOwner(){
-    //gets the current owner of this card
+    return owner;
   }
-  public String setOwner(){
-    //used to reset the owner to null when the card is discarded
+  public void setOwner(Player p){
+    this.owner=p.getName();
+  }
+  public void setOwner(String s){
+    this.owner=s;
   }
 }
 
 class Deck{
-  private RiskCard[] cards = new RiskCard[42];
-  private RiskCard[] discardPile = new RiskCard[42];
+  private int size;
+  private RiskCard[] cards;
+  private RiskCard[] discardPile;
+
+  public Deck(String filename){
+    /*reads JSON array from file provided in filename,
+    Initializes the cards and discardPile lists
+    Initializes the individual cards and places them into the card list.*/
+    LinkedList cards = new LinkedList();
+    LinkedList discardPile = new LinkedList();
+  }
 
   public RiskCard draw(){
     //returns a random card from the cards array
+    return cards.remove(randomWithRange(0,cards.size()-1));
   }
   public void shuffle(){
     //takes all of the cards in the discardPile, adds them to the cards array, and randomizes the order
+    int j = discardPiles.size();
+    for(int i = 0; i < j; i++){
+      cards.add(discardPile.remove());
+    }
+    LinkedList temp = new LinkedList();
+    j = cards.size();
+    for(int i = 0; i < j; i++){
+      temp.add(cards.remove(randomWithRange(0,cards.size()-1)));
+    }
+    cards = temp;
   }
-  public void discard(){
+  public void discard(RiskCard c){
     //takes a card object owned by a player and moves it to the discard pile
+    c.setOwner(null);
+    discardPile.add(c);
+    //should auto set card owner to null
+  }
+  private int randomWithRange(int min, int max)
+  {
+     int range = (max - min) + 1;
+     return (int)(Math.random() * range) + min;
   }
 }
 
