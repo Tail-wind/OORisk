@@ -108,18 +108,56 @@ class Player{
 }
 
 class Map{
-  private String territory;
-  private String continents;
+  private ArrayList<String> territory;
+  private ArrayList<String> continents;
   private int unitPerContinents = 0;
   private boolean cards = false;
   private String leader;
 
-  public boolean containsTerritory(){}
-  public Deck createDeck(){}
-  public void assignTerritories(){}
-  public int getReinforcments(){}
-  public boolean checkPlaying(){}
-  public String getLeader(){}
+  Map(){
+    territories = new ArrayList<>(Arrays.asList("Ukraine","Ireland","Russia",......));
+    continents = new ArrayList<>(Arrays.asList("Africa","Europe","Asia",......));
+    leader = null;
+  }
+
+  public boolean containsTerritory(String cont, String terr){
+    return (territory.contains(terr) && continents.contains(cont))
+  }
+
+  public Deck createDeck(){
+	return Deck deck = new Deck()
+  }
+  public void assignTerritories(Player playerName){
+	  territoriesOwned++; //Increase the number of territories a player has by 1.
+  }
+
+  public void getReinforcements(){
+	  if(Player.has("Europe"))
+            Player.numUnits=player.numUnits+5;
+	  if(Player.has("Asia"))
+            Player.numUnits=player.numUnits+6;
+          if(Player.has("South America"))
+            Player.numUnits=player.numUnits+4;
+          if(Player.has("North America"))
+            Player.numUnits=player.numUnits+3;
+          if(Player.has("Africa"))
+            Player.numUnits=player.numUnits+5;
+          if(Player.has("Australia"))
+            Player.numUnits=player.numUnits+4;
+  }
+
+  public boolean isPlaying(Player player){
+    return player.territoriesOwned != 0;
+  }
+
+  public String getLeader(){
+    Player leader;
+    for(int i=0; i<numplayers();i++){
+      if(leader.score < player[i].score)
+        leader = player[i]
+    }
+    return leader.name;
+  }
 }
 
 class Territory{
@@ -127,10 +165,30 @@ class Territory{
   private String owner;
   private int numUnits = 0;
   private String name;
-  private String[] adjacentTerritory = new String[10];//not most effiecent way to do this
+  private LinkedList<String> adjacentTerritory;//not most effiecent way to do this
 
-  public String getContinent(){}
-  public String changeOwner(){}
-  public boolean isAsjacent(){}
-  public String getOwner(){}
+  Territory(String cntnt, String ownr, int unts, String nme, LinkedList<String> adjTrrtry) {
+    continent = cntnt;
+    owner = ownr;
+    numUnits = unts;
+    name = nme;
+    adjacentTerritory = adjTrrtry;
+  }
+
+  public String getContinent() {
+    return continent;
+  }
+  public String changeOwner(String newOwner) {
+    String tmp = owner;
+    owner = newOwner;
+    return tmp;
+  }
+
+  public boolean isAdjacent(String name) {
+    return adjacentTerritory.contains(name);
+  }
+
+  public String getOwner() {
+    return owner;
+  }
 }
