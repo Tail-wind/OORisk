@@ -88,7 +88,9 @@ class Player{
   public boolean addCard(Deck d){
     riskCard.add(d.draw());
   }
-  public boolean addTerriory(){}
+  public boolean addTerriory(Territory t){
+    t.changeOwner(name);
+  }
   public String getColour(){
     return colour;
   }
@@ -96,8 +98,7 @@ class Player{
     numUnits = numUnits + units;
   }
   public int attack(Territory attacker, Territory defender){
-    /*needs attacker input on how many units to use
-    results should be automatically calculated once attack is initiated
+    /*results should be automatically calculated once attack is initiated
     should automatically resolve unit placement afterwards too
     */
   }
@@ -135,15 +136,15 @@ class Map{
 	  if(Player.has("Europe"))
             Player.numUnits=player.numUnits+5;
 	  if(Player.has("Asia"))
-            Player.numUnits=player.numUnits+6;
-          if(Player.has("South America"))
-            Player.numUnits=player.numUnits+4;
-          if(Player.has("North America"))
-            Player.numUnits=player.numUnits+3;
-          if(Player.has("Africa"))
+            Player.numUnits=player.numUnits+7;
+    if(Player.has("South America"))
+            Player.numUnits=player.numUnits+2;
+    if(Player.has("North America"))
             Player.numUnits=player.numUnits+5;
-          if(Player.has("Australia"))
-            Player.numUnits=player.numUnits+4;
+    if(Player.has("Africa"))
+            Player.numUnits=player.numUnits+3;
+    if(Player.has("Australia"))
+            Player.numUnits=player.numUnits+2;
   }
 
   public boolean isPlaying(Player player){
